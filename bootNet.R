@@ -38,6 +38,8 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, beta_matrix, sub_sample)
     # newDataInd <- c(sample(1:15,floor(sub_sample*15)), sample(16:30,floor(sub_sample*15))) # sampling from both groups (quantitative)
     newDataInd <- c(sample(grep('Blood', outcome), floor(sub_sample*(length(grep('Blood', outcome))/2))), 
                     sample(grep('Buccal', outcome), floor(sub_sample*(length(grep('Buccal', outcome))/2))))
+    # above is hard coded - need to implement a check for outcome (y) type, i.e. qualitative vs quantitative
+    # then perform the correct family model
     #Subset the data
     newData <- data[newDataInd,]
     # In the outcome variable get the same patients as were selected for this iteration
