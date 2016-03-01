@@ -10,16 +10,12 @@
 # set is large even running across 4-8 cores will quickly utalise many GB of RAM - you have been warned!
 #
 # """
+#
 # This script pulls out information from vcf files.
-# The script accepts 1 argument (file name).
+# 
+# E.g. use:
+# bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, beta_matrix = beta_norm, sub_sample = 0.666, cores = 4)
 #
-# E.g. INPUT
-# ./vcfcompiler_diagnostics.sh /path/to/initial_filter.vcf
-#
-# The output is a csv file named after the vcf
-# WARNING: if the csv file already exists, this script will REPLACE ALL OF ITS CONTENT
-# E.g. OUTPUT
-# initial_filter.csv
 # """
 
 ########################
