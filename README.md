@@ -2,7 +2,7 @@
 
 `bootNet` is a wrapper for the fantastic [glmnet](https://cran.r-project.org/web/packages/glmnet/index.html) `R` package - it brings bootstrapping and parallel processing to the elastic-net framework.
 
-This script is currently set up to analyse methylation data in the form of beta matrices. Hopefully future updates will allow analysis of various types of data.
+This script is currently set up to analyse methylation data in the form of beta matrices. The beta matrix must have CpG sites as rows and samples as columns for bootNet to work. Hopefully future updates will allow analysis of various types of data.
 
 ## Updates
 
@@ -32,3 +32,15 @@ This update adds a parallel version of the bootNet function to utalise multiple 
     + compare selected sites
   - look into AUC and ROC as another form of marker selection/validation  
 
+## Performance expectations
+
+System used:
+
+  - Intel Core i7-4900MQ (4 core, 8 threads)
+  - 32GB DDR3
+  - 256GB SSD
+  - Linux - 4.3.0-towo.3-siduction-amd64 x86_64 (64 bit)
+
+Experiment was 24 samples run on Illumina 450K methylation array (24 columns, 446280 rows). Phenotype was quantitative (age).
+
+Running **100 iterations** and using **4 cores** the maximum observed RAM usage was **20GB**, taking **85.6 seconds**. Further testing on systems with higher specs to follow...

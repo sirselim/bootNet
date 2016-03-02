@@ -1,36 +1,52 @@
 #!/usr/bin/Rscript
 #
 # Created: 2016/01/10
-# Last modified: 2016/03/02
+# Last modified: 2016/03/03
 # Author: Miles Benton
 # Version: 0.1.1.1
 # 
-# This update add a parallel version of the bootNet function to utalise multiple cores if available
+# This update adds a parallel version of the bootNet function to utalise multiple cores if available
 # WARNING: be aware of the amount of available system RAM when using bootNet.parallel, if the data
 # set is large even running across 4-8 cores will quickly utalise many GB of RAM - you have been warned!
 #
 # """
 #
-# This script pulls out information from vcf files.
-# 
+# This script is currently set up to analyse methylation data in the form of beta matrices.
+# The beta matrix must have CpG sites as rows and samples as columns for bootNet to work.
+# Hopefully future updates will allow analysis of various types of data.
+#
 # E.g. use:
-# bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, beta_matrix = beta_norm, sub_sample = 0.666, cores = 4, sampleID = sampleID)
+# bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, cores = 4, sampleID = sampleID)
 #
 # """
 
 ########################
 ## bootstrap function ##
 ########################
-bootNet <- function(data, outcome, Alpha, iter, Lambda, beta_matrix, sub_sample, sampleID){
+bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
   # include checks for type of outcome data
   # quantitative needs to be named numeric
   # qualitative needs to be factor
+  # check for NA's in data and outcome
+  
+  # report on outcome type
+  if (is.numeric(outcome) == TRUE) {
+    cat('...outcome is quantitative, using gaussian approach in glmnet model...', '\n')
+  } else {
+    cat('...outcome is qualitative, using binomial approach in glmnet model...', '\n')
+  }
   
   # load packages
   require(glmnet)
   
   # create empty list
   cpg_list <- list()
+  
+  # create an object to extract sites from later
+  cpg.sites <- rownames(data)
+  
+  # transpose data for glmnet
+  data <- t(data)
   
   # bootstrap process 
   for (i in 1:iter){
@@ -44,30 +60,23 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, beta_matrix, sub_sample,
       newDataInd <- outcome[names(outcome) %in% subID]  # subset outcome for correct samples
       newData <- data[rownames(data) %in% names(newDataInd),] # subset the data
       newOut <- as.numeric(newDataInd)
+      # Do glmnet - 'gaussian' family
+      fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha)
     } else {
       # sample from qualitative outcome
       newDataInd <- c(sample(grep(levels(outcome)[1], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[1], outcome))))), 
                       sample(grep(levels(outcome)[2], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[2], outcome))))))
       newData <- data[newDataInd,]  # subset the data
       newOut <- outcome[newDataInd] # In the outcome variable get the same patients as were selected for this iteration
+      # Do glmnet - 'binomial' family
+      fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha)
     } 
     
-    # Do glmnet
-    # determine whether outcome is qualitative or quantitative
-    if (is.numeric(outcome) == TRUE) {
-      # if TRUE then 'gaussian' family
-      cat('...outcome is quantitative, using gaussian approach in glmnet model...')
-      fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha)
-    } else {
-      # if FASLE then 'binomial' family
-      cat('...outcome is qualitative, using binomial approach in glmnet model...')
-      fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha)
-    }
-    # Get model coefficients for glmnet
+    # Get model coefficients
     Coefficients <- coef(fit, s = 0.001)  # if cv is performed this can be coef(fit, s = cv.fit$lambda.min)
     
     # Get CpG list for which coefficients are not 0
-    cpgs <- rownames(beta_matrix[Coefficients@i,])
+    cpgs <- cpg.sites[Coefficients@i]
     name <- paste('run:', i, sep = '')
     cpg_list[[name]] <- cpgs
     print(i)
@@ -83,13 +92,29 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, beta_matrix, sub_sample,
 #################################
 ## parallel bootstrap function ##
 #################################
-bootNet.par <- function(data, outcome, Alpha, iter, Lambda, beta_matrix, sub_sample, cores, sampleID){
+bootNet.par <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cores, sampleID){
+  
+  # report on outcome type
+  if (is.numeric(outcome) == TRUE) {
+    cat('...outcome is quantitative, using gaussian approach in glmnet model...', '\n')
+  } else {
+    cat('...outcome is qualitative, using binomial approach in glmnet model...', '\n')
+  }
+  
   # load packages
   require(glmnet)
-  library(foreach)
-  library(doParallel)
+  require(foreach)
+  require(doParallel)
+  
   # register cores
   registerDoParallel(cores = cores)
+  
+  # create an object to extract sites from later
+  cpg.sites <- rownames(data)
+  
+  # transpose data for glmnet
+  data <- t(data)
+  
   # bootstrap process 
   foreach (i = 1:iter, .combine = c) %dopar% {
     set.seed(i)
@@ -103,30 +128,22 @@ bootNet.par <- function(data, outcome, Alpha, iter, Lambda, beta_matrix, sub_sam
       newDataInd <- outcome[names(outcome) %in% subID]  # subset outcome for correct samples
       newData <- data[rownames(data) %in% names(newDataInd),] # subset the data
       newOut <- as.numeric(newDataInd)
+      # Do glmnet - 'gaussian' family
+      fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha)
     } else {
       # sample from qualitative outcome
       newDataInd <- c(sample(grep(levels(outcome)[1], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[1], outcome))))), 
                       sample(grep(levels(outcome)[2], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[2], outcome))))))
       newData <- data[newDataInd,]  # subset the data
       newOut <- outcome[newDataInd] # In the outcome variable get the same patients as were selected for this iteration
+      # Do glmnet - 'gaussian' family
+      fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha)
     } 
     
-    # Do glmnet
-    # determine whether outcome is qualitative or quantitative
-    if (is.numeric(outcome) == TRUE) {
-      # if TRUE then 'gaussian' family
-      cat('...outcome is quantitative, using gaussian approach in glmnet model...')
-      fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha)
-    } else {
-      # if FASLE then 'binomial' family
-      cat('...outcome is qualitative, using binomial approach in glmnet model...')
-      fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha)
-    }
-    
-    # Get model coefficients for glmnet
+    # Get model coefficients
     Coefficients <- coef(fit, s = 0.001)  # if cv is performed this can be coef(fit, s = cv.fit$lambda.min)
     # Get CpG list for which coefficients are not 0
-    cpgs <- rownames(beta_matrix[Coefficients@i,])
+    cpgs <- cpg.sites[Coefficients@i]
     list(cpgs)
   }
 }
