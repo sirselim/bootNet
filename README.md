@@ -25,4 +25,10 @@ This update adds a parallel version of the bootNet function to utalise multiple 
   - add example data set
   - add a decent tutorial
   - include additional quality checks
+  - explore bias estimation and performance of selected markers
+  - implement a double-bootstrap method as an additional way to explore performance metrics
+    + separate training and test data
+    + bootstrap both data sets
+    + compare selected sites
+  - look into AUC and ROC as another form of marker selection/validation  
 
