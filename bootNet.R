@@ -6,7 +6,7 @@
 # Version: 0.1.1.1
 # 
 # This update adds a parallel version of the bootNet function to utalise multiple cores if available
-# WARNING: be aware of the amount of available system RAM when using bootNet.parallel, if the data
+# WARNING [here be dragons!]: be aware of the amount of available system RAM when using bootNet.parallel, if the data
 # set is large even running across 4-8 cores will quickly utalise many GB of RAM - you have been warned!
 #
 # """
@@ -93,6 +93,11 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
 ## parallel bootstrap function ##
 #################################
 bootNet.par <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cores, sampleID){
+  # include checks for type of outcome data
+  # quantitative needs to be named numeric
+  # qualitative needs to be factor
+  # check for NA's in data and outcome
+  
   
   # report on outcome type
   if (is.numeric(outcome) == TRUE) {
