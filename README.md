@@ -57,14 +57,14 @@ System used:
 
 Running **100 iterations** and using **4 cores** the maximum observed RAM usage was **20GB**, taking **85.6 seconds**. 
 
-**Experiment 2**: 75 samples run on Illumina 450K methylation array (24 columns, 445998 rows). Phenotype was quantitative (age).
+**Experiment 2**: 75 samples run on Illumina 450K methylation array (24 columns, 445998 rows). Phenotype was quantitative (glucose).
 
   - Intel Xeon E5-2620 (6 cores, 12 threads)
   - 128GB DDR3
   - 256GB SSD
   - Linux - Debian Sid (64 bit)
 
-Running **100 iterations** and using **6 cores** the maximum observed RAM usage was **24GB**, taking **145 seconds**. 
+Running **100 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **120.9 seconds**. 
 
 ## Dependencies 
 
