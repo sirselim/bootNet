@@ -14,6 +14,16 @@ This update adds a parallel version of the bootNet function to utalise multiple 
 
 ## Example usage:
 
+What do you need to provide the `bootNet` script?
+
+  - data - methylation beta matrix (formated CpG sites as rows, samples as columns)
+  - outcome - either as numeric (quantitative trait) or as factor (qualitative trait)
+  - Alpha - sets the mixture between ridge-regression and lasso
+  - iter - the number of iterations to bootstrap
+  - sub_sample - percentage of sample/case-control groups to sub-sample for bootstrapping
+  - sampleID - a list of sample IDs (usually the column names of the beta matrix). These **MUST** be in the same order as the samples in the beta matrix
+  - cores - number of cores to use for `bootNet.parallel`
+
 ### bootNet()
 `bootNet(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, sampleID = sampleID)`
 
