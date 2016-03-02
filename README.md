@@ -15,7 +15,7 @@ This update adds a parallel version of the bootNet function to utalise multiple 
 ## Example usage:
 
 ### bootNet()
-`bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, cores = 4, sampleID = sampleID)`
+`bootNet(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, sampleID = sampleID)`
 
 ### bootNet.parallel()
 `bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, cores = 4, sampleID = sampleID)`
