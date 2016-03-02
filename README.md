@@ -44,3 +44,11 @@ System used:
 Experiment was 24 samples run on Illumina 450K methylation array (24 columns, 446280 rows). Phenotype was quantitative (age).
 
 Running **100 iterations** and using **4 cores** the maximum observed RAM usage was **20GB**, taking **85.6 seconds**. Further testing on systems with higher specs to follow...
+
+## Dependencies 
+
+There are 3 R packages required by `bootNet`:
+
+  - `glmnet`
+  - `foreach` (bootNet.parallel)
+  - `doParallel` (bootNet.parallel)
