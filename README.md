@@ -67,6 +67,7 @@ System used (Dell workstation):
   - Linux - Debian Sid (64 bit)
     + Running **100 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **120.9 seconds**.  
     + Running the above at **1000 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **1152.8 seconds**. 
+    + Running the above at **5000 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **5718.8 seconds**. 
 
 ## Dependencies 
 
