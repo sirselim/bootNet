@@ -5,11 +5,15 @@
 # Author: Miles Benton
 # Version: 0.1.1.1
 # 
+# bootNet is a wrapper for the fantastic glmnet R package - it brings bootstrapping and parallel processing to the elastic-net framework.
+#
+# For more information please see README at: https://github.com/sirselim/bootNet
+#
+# """
+#
 # This update adds a parallel version of the bootNet function to utalise multiple cores if available
 # WARNING [here be dragons!]: be aware of the amount of available system RAM when using bootNet.parallel, if the data
 # set is large even running across 4-8 cores will quickly utalise many GB of RAM - you have been warned!
-#
-# """
 #
 # This script is currently set up to analyse methylation data in the form of beta matrices.
 # The beta matrix must have CpG sites as rows and samples as columns for bootNet to work.
@@ -24,17 +28,18 @@
 ## bootstrap function ##
 ########################
 bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
-  # include checks for type of outcome data
-  # quantitative needs to be named numeric
-  # qualitative needs to be factor
-  # check for NA's in data and outcome
   
   # report on outcome type
   if (is.numeric(outcome) == TRUE) {
     cat('...outcome is quantitative, using gaussian approach in glmnet model...', '\n')
-  } else {
+  } else if (is.factor(outcome) == TRUE) {
     cat('...outcome is qualitative, using binomial approach in glmnet model...', '\n')
+  } else {
+    outcome.error <- paste0('outcome is [', class(outcome), ']', ' it needs to be numeric or factor...')
+    cat('...ERROR:', outcome.error, '\n')
   }
+  
+  ## implement a check for NA's in data and outcome, quit with error if found
   
   # load packages
   require(glmnet)
@@ -93,19 +98,19 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
 ## parallel bootstrap function ##
 #################################
 bootNet.par <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cores, sampleID){
-  # include checks for type of outcome data
-  # quantitative needs to be named numeric
-  # qualitative needs to be factor
-  # check for NA's in data and outcome
-  
-  
+
   # report on outcome type
   if (is.numeric(outcome) == TRUE) {
     cat('...outcome is quantitative, using gaussian approach in glmnet model...', '\n')
-  } else {
+  } else if (is.factor(outcome) == TRUE) {
     cat('...outcome is qualitative, using binomial approach in glmnet model...', '\n')
+  } else {
+    outcome.error <- paste0('outcome is [', class(outcome), ']', ' it needs to be numeric or factor...')
+    cat('...ERROR:', outcome.error, '\n')
   }
-  
+
+  ## implement a check for NA's in data and outcome, quit with error if found
+    
   # load packages
   require(glmnet)
   require(foreach)
