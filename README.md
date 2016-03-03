@@ -10,7 +10,7 @@ This script is currently set up to analyse methylation data in the form of beta 
 
 This update adds a parallel version of the bootNet function to utalise multiple cores if available.
 
-**WARNING:** be aware of the amount of available system RAM when using `bootNet.parallel()`, if the data set is large even running across 4-8 cores will quickly utalise many GB of RAM - **you have been warned!**
+**WARNING:** be aware of the amount of available system RAM when using `bootNet.parallel()`, if the data set is large even running across 4-8 cores will quickly utalise many GB of RAM - **you have been warned!**  Some real-world usage metrics across different Linux systems are provided below.
 
 ## Example usage:
 
