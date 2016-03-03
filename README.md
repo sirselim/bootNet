@@ -32,9 +32,10 @@ What do you need to provide the `bootNet` script?
 
 ## To do list
 
-  - add example data set
-  - add a decent tutorial
+  - add example data set and a decent tutorial
   - include additional quality checks
+    + ~~ensure outcome is either numeric or factor~~
+    + check for missing data (NAs) in both data and outcome
   - explore bias estimation and performance of selected markers
   - implement a double-bootstrap method as an additional way to explore performance metrics
     + separate training and test data
