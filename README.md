@@ -55,7 +55,7 @@ System used:
   - 256GB SSD
   - Linux - 4.3.0-towo.3-siduction-amd64 x86_64 (64 bit)
 
-Running **100 iterations** and using **4 cores** the maximum observed RAM usage was **20GB**, taking **85.6 seconds**. 
+  + Running **100 iterations** and using **4 cores** the maximum observed RAM usage was **20GB**, taking **85.6 seconds**. 
 
 **Experiment 2**: 75 samples run on Illumina 450K methylation array (24 columns, 445998 rows). Phenotype was quantitative (glucose).
 
@@ -64,9 +64,9 @@ Running **100 iterations** and using **4 cores** the maximum observed RAM usage 
   - 256GB SSD
   - Linux - Debian Sid (64 bit)
 
-Running **100 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **120.9 seconds**.  
+  + Running **100 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **120.9 seconds**.  
 
-Running the above at **1000 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **1152.8 seconds**. 
+  + Running the above at **1000 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **1152.8 seconds**. 
 
 ## Dependencies 
 
