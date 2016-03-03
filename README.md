@@ -48,25 +48,24 @@ A few test examples showing systems and performance metrics.
 
 **Experiment 1**: 24 samples run on Illumina 450K methylation array (24 columns, 446280 rows). Phenotype was quantitative (age).
 
-System used:
+System used (Dell laptop: Precision M4800):
 
   - Intel Core i7-4900MQ (4 core, 8 threads)
   - 32GB DDR3
   - 256GB SSD
   - Linux - 4.3.0-towo.3-siduction-amd64 x86_64 (64 bit)
-
-  + Running **100 iterations** and using **4 cores** the maximum observed RAM usage was **20GB**, taking **85.6 seconds**. 
+    + Running **100 iterations** and using **4 cores** the maximum observed RAM usage was **20GB**, taking **85.6 seconds**. 
 
 **Experiment 2**: 75 samples run on Illumina 450K methylation array (24 columns, 445998 rows). Phenotype was quantitative (glucose).
+
+System used (Dell workstation):
 
   - Intel Xeon E5-2620 (6 cores, 12 threads)
   - 128GB DDR3
   - 256GB SSD
   - Linux - Debian Sid (64 bit)
-
-  + Running **100 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **120.9 seconds**.  
-
-  + Running the above at **1000 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **1152.8 seconds**. 
+    + Running **100 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **120.9 seconds**.  
+    + Running the above at **1000 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **1152.8 seconds**. 
 
 ## Dependencies 
 
