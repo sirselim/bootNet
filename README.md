@@ -41,7 +41,10 @@ What do you need to provide the `bootNet` script?
     + separate training and test data
     + bootstrap both data sets
     + compare selected sites
-  - look into AUC and ROC as another form of marker selection/validation  
+  - look into AUC and ROC as another form of marker selection/validation
+  - add an argument to perform "leave one out" analysis (replaces sub-sampling)
+  - write up as manuscript
+    + ***bootNet: identifying robust classifiers in methylation data***  
 
 ## Performance expectations
 
