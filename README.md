@@ -60,7 +60,7 @@ System used (Dell laptop: Precision M4800):
   - Linux - 4.3.0-towo.3-siduction-amd64 x86_64 (64 bit)
     + Running **100 iterations** and using **4 cores** the maximum observed RAM usage was **20GB**, taking **85.6 seconds**. 
 
-**Experiment 2**: 75 samples run on Illumina 450K methylation array (24 columns, 445998 rows). Phenotype was quantitative (glucose).
+**Experiment 2**: 75 samples run on Illumina 450K methylation array (75 columns, 445998 rows). Phenotype was quantitative (glucose).
 
 System used (Dell workstation):
 
