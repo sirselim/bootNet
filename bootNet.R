@@ -97,7 +97,7 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
 #################################
 ## parallel bootstrap function ##
 #################################
-bootNet.par <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cores, sampleID){
+bootNet.parallel <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cores, sampleID){
 
   # report on outcome type
   if (is.numeric(outcome) == TRUE) {
