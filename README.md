@@ -8,7 +8,7 @@ This script is currently set up to analyse methylation data in the form of beta 
 
 ### Version: 0.1.1.1
 
-This update adds a parallel version of the bootNet function to utalise multiple cores if available.
+This update adds a parallel version of the bootNet function to utilise multiple cores if available.
 
 **WARNING:** be aware of the amount of available system RAM when using `bootNet.parallel()`, if the data set is large even running across 4-8 cores will quickly utalise many GB of RAM - **you have been warned!**  Some real-world usage metrics across different Linux systems are provided below.
 
@@ -71,6 +71,24 @@ System used (Dell workstation):
     + Running **100 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **120.9 seconds**.  
     + Running the above at **1000 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **1152.8 seconds**. 
     + Running the above at **5000 iterations** and using **10 cores** the maximum observed RAM usage was **30GB**, taking **5718.8 seconds**. 
+
+**Experiment 3**: 105 samples run on Illumina 450k methylation array (105 columns, 380777 rows). Phenotype was qualitative (BMI separated into two categories)
+
+System used (Z170-D3H)
+
+  - Intel Core i7-6700 3.40GH (4 cores, 8 threads)
+  - 16GB DDR4 (2 x 8GB @ 2133 MHz)
+  - 2TB Western Digital Harddrive
+  - Linux Ubuntu 14.04 LTS (64 bit)
+    + **10 iterations** and using **1 core** the maximum observed RAM usage was **5GB**, taking **34.42089 secs**.
+    + **10 iterations** and using **2 cores** the maximum observed RAM usage was **9GB**, taking **20.0074 secs**.
+    + **10 iterations** and using **3 cores** the maximum observed RAM usage was **12.5GB**, taking **18.31608 secs**.
+    + **20 iterations** and using **3 cores** the maximum observed RAM usage was **13.8GB**, taking **33.594 secs**.
+    + **30 iterations** and using **3 cores** the maximum observed RAM usage was **12.4GB**, taking **48.210 secs**.
+    + **50 iterations** and using **3 cores** the maximum observed RAM usage was **13GB**, taking **83.090 secs**.
+    + **100 iterations** and using **3 cores** the maximum observed RAM usage was **13.6GB**, taking **161.983 secs**.
+    + **1000 iterations** and using **3 cores** the maximum observed RAM usage was **13 GB**, taking **1628.748 secs**.
+
 
 ## Dependencies 
 
