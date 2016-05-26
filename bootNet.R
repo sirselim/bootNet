@@ -27,7 +27,7 @@
 ########################
 ## bootstrap function ##
 ########################
-bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
+bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID, jackknife=FALSE){
   
   # report on outcome type
   if (is.numeric(outcome) == TRUE) {
@@ -56,29 +56,49 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
   # transpose data for glmnet
   data <- t(data)
   
+  # implement jackknife procedure
+  if (jackknife == TRUE){
+    print('jackknifing the data, the sub_sample argument and iteration is over-ruled')
+    iter <- length(outcome)-1
+  }
+  
   # bootstrap process 
   for (i in 1:iter){
     set.seed(i)
-    # Select a random sub-sample from all samples
-    # first determine whether outcome is qualitative or quantitative
-    if (is.numeric(outcome) == TRUE) {
-      # sample from quantitative outcome
-      # NOTE: sampleID must be the same order as samples in the beta matrix/data!
-      subID <- sample(sampleID, ceiling(sub_sample*(length(sampleID))))  # get ID's for sub-sample
-      newDataInd <- outcome[names(outcome) %in% subID]  # subset outcome for correct samples
-      newData <- data[rownames(data) %in% names(newDataInd),] # subset the data
-      newOut <- as.numeric(newDataInd)
-      # Do glmnet - 'gaussian' family
-      fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha)
-    } else {
-      # sample from qualitative outcome
-      newDataInd <- c(sample(grep(levels(outcome)[1], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[1], outcome))))), 
-                      sample(grep(levels(outcome)[2], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[2], outcome))))))
-      newData <- data[newDataInd,]  # subset the data
-      newOut <- outcome[newDataInd] # In the outcome variable get the same patients as were selected for this iteration
-      # Do glmnet - 'binomial' family
-      fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha)
-    } 
+    
+    # set subsetting based on Jackknife approach - each iteration will remove one sample from the data
+    if (jackknife == TRUE){
+      jk_data<- data[-i,]
+      newOut <- outcome[-i]
+      if (is.numeric(outcome) == TRUE) {
+        fit <- glmnet(x = jk_data, y = newOut, family = "gaussian", alpha = Alpha)
+      }
+      else {
+        fit <- glmnet(x = jk_data, y = newOut, family = "binomial", alpha = Alpha)
+      }
+    }
+    else{
+      # Select a random sub-sample from all samples
+      # first determine whether outcome is qualitative or quantitative
+      if (is.numeric(outcome) == TRUE) {
+        # sample from quantitative outcome
+        # NOTE: sampleID must be the same order as samples in the beta matrix/data!
+        subID <- sample(sampleID, ceiling(sub_sample*(length(sampleID))))  # get ID's for sub-sample
+        newDataInd <- outcome[names(outcome) %in% subID]  # subset outcome for correct samples
+        newData <- data[rownames(data) %in% names(newDataInd),] # subset the data
+        newOut <- as.numeric(newDataInd)
+        # Do glmnet - 'gaussian' family
+        fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha)
+      } else {
+        # sample from qualitative outcome
+        newDataInd <- c(sample(grep(levels(outcome)[1], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[1], outcome))))), 
+                        sample(grep(levels(outcome)[2], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[2], outcome))))))
+        newData <- data[newDataInd,]  # subset the data
+        newOut <- outcome[newDataInd] # In the outcome variable get the same patients as were selected for this iteration
+        # Do glmnet - 'binomial' family
+        fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha)
+      } 
+    }
     
     # Get model coefficients
     Coefficients <- coef(fit, s = 0.001)  # if cv is performed this can be coef(fit, s = cv.fit$lambda.min)
