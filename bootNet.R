@@ -40,7 +40,10 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
   }
   
   ## implement a check for NA's in data and outcome, quit with error if found
-  
+  outcome_nas <- any(is.na(outcome))
+  data_nas <- any(is.na(data))
+  if (!outcome_nas | !data_nas) stop("bootNet has discovered NA's in outcome or data, terminating function call") 
+
   # load packages
   require(glmnet)
   
@@ -97,7 +100,7 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID){
 #################################
 ## parallel bootstrap function ##
 #################################
-bootNet.par <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cores, sampleID){
+bootNet.parallel <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cores, sampleID){
 
   # report on outcome type
   if (is.numeric(outcome) == TRUE) {
