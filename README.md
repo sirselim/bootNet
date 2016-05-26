@@ -8,9 +8,13 @@ This script is currently set up to analyse methylation data in the form of beta 
 
 ### Version: 0.1.1.1
 
-This update adds a parallel version of the bootNet function to utilise multiple cores if available.
+  - This update adds a parallel version of the bootNet function to utilise multiple cores if available.
 
 **WARNING:** be aware of the amount of available system RAM when using `bootNet.parallel()`, if the data set is large even running across 4-8 cores will quickly utalise many GB of RAM - **you have been warned!**  Some real-world usage metrics across different Linux systems are provided below.
+
+  - Added functionality to detect NAs in data/outcome and terminate the function
+
+  - Created a gh-pages branch that will eventually house a website for `bootNet`: [here](https://sirselim.github.io/bootNet/)
 
 ## Example usage:
 
