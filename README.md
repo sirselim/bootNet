@@ -26,10 +26,11 @@ What do you need to provide the `bootNet` script?
   - *iter* - the number of iterations to bootstrap
   - *sub_sample* - percentage of sample/case-control groups to sub-sample for bootstrapping
   - *sampleID* - a list of sample IDs (usually the column names of the beta matrix). These **MUST** be in the same order as the samples in the beta matrix
+  - *method* - optional string specifying one of two methods ('JACKKNIFE', 'LOOCV')
   - *cores* - number of cores to use for `bootNet.parallel`
 
 ### bootNet()
-`bootNet(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, sampleID = sampleID)`
+`bootNet(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, sampleID = sampleID, method = method)`
 
 ### bootNet.parallel()
 `bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, cores = 4, sampleID = sampleID)`
@@ -46,7 +47,7 @@ What do you need to provide the `bootNet` script?
     + bootstrap both data sets
     + compare selected sites
   - look into AUC and ROC as another form of marker selection/validation
-  - add an argument to perform "leave one out" analysis (alternative to sub-sampling)
+  - ~~add an argument to perform "leave one out" analysis (alternative to sub-sampling)~~
   - write up as manuscript
     + ***bootNet: identifying robust classifiers in methylation data***  
 
