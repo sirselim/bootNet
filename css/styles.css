@@ -1,3 +1,11 @@
+pre {
+    white-space: pre-wrap!important;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap!important;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 .container{
     margin: auto;
 }
@@ -33,13 +41,15 @@
 .documentation-wrapper{
     height: 400px;
 }
-.codesnippet-wrapper, .help-wrapper{
-    height: 300px;
+.codesnippet-wrapper{
+    height: auto;
 }
 .example-wrapper{
     height: 800px;
 }
-
+.help-wrapper{
+    height: 300px;
+}
 
 .documentation-container,.codesnippet-container,.example-container,.help-container{
     background-color: grey;
@@ -53,4 +63,5 @@
 
 .documentation-content,.codesnippet-content,.example-content,.help-content{
     margin: 2%;
+    width: auto;
 }

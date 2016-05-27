@@ -7,6 +7,8 @@
         <title></title>
         <!--Stylesheets-->
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <link rel="stylesheet" href="css/prism.css" />
+
     </head>
     <body>
 
@@ -33,6 +35,15 @@
                         <div class="codesnippet-container">
                             <div class="codesnippet-content">
                                 <h2>Code snippet</h2>
+                                <pre class="language-R">
+                                    <code class="language-R" style="white-space:pre-wrap">
+# BootNet                                        
+bootNet(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, sampleID = sampleID, method = method)
+
+# Parallel
+bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, cores = 4, sampleID = sampleID)
+                                    </code>
+                                </pre>
                             </div>
                         </div>
                     </div>
@@ -53,8 +64,6 @@
                 </div>
             </div>
         </div>
+        <script src="js/prism.js"></script>
     </body>
 </html>
-
-
-</div>
