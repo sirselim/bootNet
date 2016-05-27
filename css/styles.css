@@ -19,10 +19,11 @@ pre {
 .title-container{
     /* color added for dev purposes */
     background-color: lightgrey;
-    text-align: center;
     margin: auto;
     width: 90%;
     height: 80px;
+    display: flex;
+    justify-content: center;
 }
 
 .maincontent-wrapper{
