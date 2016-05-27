@@ -4,7 +4,7 @@
 
 .main-wrapper{
     margin: auto;
-    width: 70%;
+    width: 80%;
     height: auto;
 }
 
@@ -31,17 +31,15 @@
 }
 
 .documentation-wrapper{
-    height: 200px;
-}
-.codesnippet-wrapper{
-    height: 150px;
-}
-.example-wrapper{
     height: 400px;
 }
-.infohelpsection-wrapper{
-    height: 100px;
+.codesnippet-wrapper, .help-wrapper{
+    height: 300px;
 }
+.example-wrapper{
+    height: 800px;
+}
+
 
 .documentation-container,.codesnippet-container,.example-container,.help-container{
     background-color: grey;
@@ -51,4 +49,8 @@
     margin-right: 4%;
     height: auto;
     width: 100%;
+}
+
+.documentation-content,.codesnippet-content,.example-content,.help-content{
+    margin: 2%;
 }
