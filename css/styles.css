@@ -42,11 +42,13 @@ hr.sectionbreak {
 .documentation-wrapper,.codesnippet-wrapper,
 .example-wrapper,.help-wrapper, .info-wrapper{
     display: flex;
-    background-color: lightgrey;
+    /*background-color: lightgrey;*/
     margin-left:2%;
     margin-right: 2%;
+    height: auto;
 }
 
+/*
 .documentation-wrapper{
     height: 400px;
 }
@@ -62,10 +64,11 @@ hr.sectionbreak {
 .info-wrapper{
     height: 300px;
 }
+*/
 
 .documentation-container,.codesnippet-container,
 .example-container,.help-container,.info-container{
-    background-color: grey;
+    /*background-color: grey;*/
     margin-top: 10px;
     margin-left: 4%;
     margin-right: 4%;
