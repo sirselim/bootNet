@@ -28,7 +28,7 @@ hr.sectionbreak {
     /*background-color: lightgrey;*/
     margin: auto;
     width: 96%;
-    height: 80px;
+    height: 5%;
     display: flex;
     justify-content: center;
 }
