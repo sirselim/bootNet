@@ -6,21 +6,28 @@ pre {
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
+hr.sectionbreak {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+
 .container{
     margin: auto;
 }
 
 .main-wrapper{
     margin: auto;
-    width: 80%;
+    width: 100%;
     height: auto;
 }
 
 .title-container{
     /* color added for dev purposes */
-    background-color: lightgrey;
+    /*background-color: lightgrey;*/
     margin: auto;
-    width: 90%;
+    width: 96%;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -32,11 +39,12 @@ pre {
 
 /* background-color added to help with development
    delete or modify after completion */
-.documentation-wrapper,.codesnippet-wrapper,.example-wrapper,.help-wrapper{
+.documentation-wrapper,.codesnippet-wrapper,
+.example-wrapper,.help-wrapper, .info-wrapper{
     display: flex;
     background-color: lightgrey;
-    margin-left:5%;
-    margin-right: 5%;
+    margin-left:2%;
+    margin-right: 2%;
 }
 
 .documentation-wrapper{
@@ -51,8 +59,12 @@ pre {
 .help-wrapper{
     height: 300px;
 }
+.info-wrapper{
+    height: 300px;
+}
 
-.documentation-container,.codesnippet-container,.example-container,.help-container{
+.documentation-container,.codesnippet-container,
+.example-container,.help-container,.info-container{
     background-color: grey;
     margin-top: 10px;
     margin-left: 4%;
@@ -61,7 +73,8 @@ pre {
     width: 100%;
 }
 
-.documentation-content,.codesnippet-content,.example-content,.help-content{
+.documentation-content,.codesnippet-content,
+.example-content,.help-content,.info-content{
     margin: 2%;
     width: auto;
 }
