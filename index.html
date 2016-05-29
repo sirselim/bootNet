@@ -15,52 +15,70 @@
         <div class='container'>
             <div class='main-wrapper'>
                 <div class="sidebar">
-                    <!--<div class="sidebar-title">
-                        Navigation
-                    </div>-->
                     <div class="sidebar-logo"></div>
+                    <div class="sidebar-title">
+                        bootNet
+                    </div>
                     <hr class='sectionbreak'>
                     <div class="sidebar-info">
-                        <strong>Author</strong><br><br>
+                        <strong>Author</strong><br>
+                        <br>
                         Miles Benton<br>
+                        <br>
                         <i>PostDoctoral Researcher
                         Institute of Health and Biomedical Innovation</i>
                         <br>
-                        <a href=github.com/sirselim>github.com/sirselim</a><br>
-                        <a href=https://www.researchgate.net/profile/Miles_Benton>ResearchGate Profile</a><br>
-                        <a href=https://scholar.google.co.nz/citations?user=iEhBavEAAAAJ&hl=en>Google Scholar Profile</a><br>
+                        <a href=github.com/sirselim>Github</a>,
+                        <a href=https://www.researchgate.net/profile/Miles_Benton>Research Gate</a>,
+                        <a href=https://scholar.google.co.nz/citations?user=iEhBavEAAAAJ&hl=en>Google Scholar</a>,
+                        <a href=ttps://twitter.com/miles_benton>Twitter</a>
                     </div>
                     <hr class='sectionbreak'>
-                    <div class="sidebar-quicklinks">
+                    <div class="sidebar-documentation">
                         <strong>Documentation</strong>
+                        <br>
+                        <div class="sidebar-list-indent">
+                            <li><a href=https://sirselim.github.io/bootNet/>Home</a></li>
+                            <li><a href=github.com/sirselim/bootNet>Github repository</a></li>
+                            <li><a href="">Presentation</a></li>
+                            <li><a href="">Tutorial</a></li>
+                            <li><a href="">Example analysis</a></li>
+                        </div>
                     </div>
                 </div>
                 <div class='title-container'>
                     <h1>bootNet (name pending) website</h1>
                 </div>
-
                 <div class='maincontent-wrapper'>
                 <hr class='sectionbreak'><br>
                     <div class="documentation-wrapper">
                         <div class="documentation-container">
                             <div class="documentation-content">
                                 <h2>bootNet</h2>
-                                <br>
-                                <p>
-                                <i>...under construction...</i>
-                                </p>
-                                <br>
-                                Here is a link to a resent presentation on bootNet: [link to come]
+                                <b>bootNet</b> is a wrapper that adds a bootstrap
+                                process to the glmNet package.
+
+                                This script is currently set up to analyse
+                                methylation data in the form of beta matrices.
+                                Hopefully, future updates will allow analysis of
+                                various types of data.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class='sectionbreak'>
+                    <div class="quickstart-wrapper">
+                        <div class="quickstart-container">
+                            <div class="quickstart-content">
+                                <h2>Quick start</h2>
                             </div>
                         </div>
                     </div>
 
                     <hr class='sectionbreak'>
-
-                    <div class="codesnippet-wrapper">
-                        <div class="codesnippet-container">
-                            <div class="codesnippet-content">
-                                <h2>Quick start</h2>
+                    <div class="example-wrapper">
+                        <div class="example-container">
+                            <div class="example-content">
+                                <h2>Using bootNet</h2>
                                 <pre class="language-R">
                                     <code class="language-R" style="white-space:pre-wrap">
 # BootNet
@@ -70,16 +88,6 @@ bootNet(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, sam
 bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, cores = 4, sampleID = sampleID)
                                     </code>
                                 </pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class='sectionbreak'>
-
-                    <div class="example-wrapper">
-                        <div class="example-container">
-                            <div class="example-content">
-                                <h2>Using bootNet</h2>
                             </div>
                         </div>
                     </div>
