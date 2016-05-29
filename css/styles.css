@@ -39,7 +39,7 @@ hr.sectionbreak {
     color: #666;
 }
 
-
+/*
 .sidebar-title{
     height:8%;
     padding: 2%;
@@ -47,22 +47,26 @@ hr.sectionbreak {
     justify-content: center;
     vertical-align: middle;
 }
+*/
 .sidebar-logo{
     padding: 2%;
     height:25%;
-    border: 1px solid grey;
-    margin-bottom: 3%;
+    margin-bottom: 5%;
+    background-image: url('../img/placeholder-icon.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 .sidebar-info{
-    height: 25%;
-}
-.sidebar-quicklinks{
     height: 30%;
 }
+.sidebar-quicklinks{
+    height: 37%;
+}
 .sidebar-info, .sidebar-quicklinks{
-    margin-bottom:3%;
+    margin-bottom:5%;
     padding: 2%;
-    border: 1px solid grey;
+
 }
 
 .title-container{
