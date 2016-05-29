@@ -1,3 +1,7 @@
+body{
+    margin: 0px;
+}
+
 pre {
     white-space: pre-wrap!important;       /* Since CSS 2.1 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -29,15 +33,14 @@ hr.sectionbreak {
     padding: 2%;
     float: left;
     position: fixed;
-    top: 10px;
-    bottom: 10px;
-    background: #eee;
+    top: 0px;
+    bottom: 0px;
+    background: #ffffe6;
     color: #666;
 }
 
 
 .sidebar-title{
-    width: 100%;
     height:8%;
     padding: 2%;
     display: flex;
@@ -46,19 +49,17 @@ hr.sectionbreak {
 }
 .sidebar-logo{
     padding: 2%;
-    width: 100%;
-    height:30%;
+    height:25%;
     border: 1px solid grey;
     margin-bottom: 3%;
 }
 .sidebar-info{
-    height: 20%;
+    height: 25%;
 }
 .sidebar-quicklinks{
     height: 30%;
 }
 .sidebar-info, .sidebar-quicklinks{
-    width: 100%;
     margin-bottom:3%;
     padding: 2%;
     border: 1px solid grey;
@@ -123,4 +124,17 @@ hr.sectionbreak {
 .example-content,.help-content,.info-content{
     margin: 2%;
     width: auto;
+}
+
+@media only screen and (max-width: 1080px) {
+    .sidebar {
+        display: none;
+        width: 0%;
+    }
+    .title-container{
+        padding-left: 0%;
+    }
+    .maincontent-wrapper{
+        padding-left: 0%;
+    }
 }
