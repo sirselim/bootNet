@@ -8,6 +8,13 @@ pre {
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+a{
+    text-decoration:none;
+    color: blue;
+}
+a:hover{
+    color: darkblue;
+}
 hr.sectionbreak {
     border: 0;
     height: 1px;
@@ -20,10 +27,6 @@ hr.sectionbreak {
     margin: auto;
     width: 100%;
     height: auto;
-}
-a{
-    text-decoration:none;
-    color: blue;
 }
 .sidebar {
     width: 20%;
@@ -79,30 +82,20 @@ a{
     padding-left: 25%;
 }
 
-/* background-color added to help with development
-   delete or modify after completion */
-.documentation-wrapper,.quickstart-wrapper,
-.example-wrapper,.help-wrapper, .info-wrapper{
+.documentation-wrapper{
     display: flex;
-    /*background-color: lightgrey;*/
     margin-left:2%;
     margin-right: 2%;
     height: auto;
 }
-
-
-.documentation-container,.quickstart-container,
-.example-container,.help-container,.info-container{
-    /*background-color: grey;*/
+.documentation-container{
     margin-top: 10px;
     margin-left: 4%;
     margin-right: 4%;
     height: auto;
     width: 100%;
 }
-
-.documentation-content,.quickstart-content,
-.example-content,.help-content,.info-content{
+.documentation-content{
     margin: 2%;
     width: auto;
 }
