@@ -2,9 +2,15 @@
 
 `bootNet` is a wrapper for the fantastic [glmnet](https://cran.r-project.org/web/packages/glmnet/index.html) `R` package - it brings bootstrapping and parallel processing to the elastic-net framework.
 
-This script is currently set up to analyse methylation data in the form of beta matrices. The beta matrix must have CpG sites as rows and samples as columns for bootNet to work. Hopefully future updates will allow analysis of various types of data.
+This script originally desinged to analyse methylation data in the form of beta matrices. The beta matrix must have CpG sites as rows and samples as columns for bootNet to work. 
+
+With a recent update `bootNet` is now data agnostic and has been tested with SNP and expression data (as well as methylation).
 
 ## Updates
+
+### Version: 0.1.2.0
+
+  - code base overhauled to be data agnostic (i.e. it can be used for methylation, SNP, expression data, but also any matrix of data if set up correctly in normal `glmnet` format)
 
 ### Version: 0.1.1.1
 
