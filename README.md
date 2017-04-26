@@ -11,6 +11,7 @@ With a recent update `bootNet` is now data agnostic and has been tested with SNP
 ### Version: 0.1.2.0
 
   - code base overhauled to be data agnostic (i.e. it can be used for methylation, SNP, expression data, but also any matrix of data if set up correctly in normal `glmnet` format)
+  - added an example data set in `/data`, this is a collection of blood and buccal cell samples 
 
 ### Version: 0.1.1.1
 
