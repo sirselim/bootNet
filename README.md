@@ -44,6 +44,9 @@ What do you need to provide the `bootNet` script?
 
 ## To do list
 
+  - ~~merge development script back into the main code base~~
+  - ~~add BOOTNET, JACKKNIFE and LOOCV methods to main script~~
+  - add BOOTNET, JACKKNIFE and LOOCV methods to the parallel method
   - add example data set and a decent tutorial
   - include additional quality checks
     + ~~ensure outcome is either numeric or factor~~

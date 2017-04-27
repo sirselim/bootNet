@@ -1,9 +1,9 @@
 #!/usr/bin/Rscript
 #
 # Created: 2016/01/10
-# Last modified: 2016/05/27
+# Last modified: 2017/04/27
 # Author: Miles Benton
-# Version: 0.1.1.1
+# Version: 0.1.2.0
 # 
 # bootNet is a wrapper for the fantastic glmnet R package - it brings bootstrapping and parallel processing to the elastic-net framework.
 #
@@ -14,10 +14,6 @@
 # This update adds a parallel version of the bootNet function to utalise multiple cores if available
 # WARNING [here be dragons!]: be aware of the amount of available system RAM when using bootNet.parallel, if the data
 # set is large even running across 4-8 cores will quickly utalise many GB of RAM - you have been warned!
-#
-# This script is currently set up to analyse methylation data in the form of beta matrices.
-# The beta matrix must have CpG sites as rows and samples as columns for bootNet to work.
-# Hopefully future updates will allow analysis of various types of data.
 #
 # E.g. use:
 # bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, cores = 4, sampleID = sampleID)
@@ -54,10 +50,10 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID, me
   require(glmnet)
   
   # create empty list
-  cpg_list <- list()
+  site_list <- list()
   
   # create an object to extract sites from later
-  cpg.sites <- rownames(data)
+  featured.sites <- rownames(data)
   
   # transpose data for glmnet
   data <- t(data)
@@ -88,10 +84,10 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID, me
       jk_data<- data[-i,]
       newOut <- outcome[-i]
       if (is.numeric(outcome) == TRUE) {
-        fit <- glmnet(x = jk_data, y = newOut, family = "gaussian", alpha = Alpha)
+        fit <- glmnet(x = jk_data, y = newOut, family = "gaussian", alpha = Alpha, lambda = Lambda)
       }
       else {
-        fit <- glmnet(x = jk_data, y = newOut, family = "binomial", alpha = Alpha)
+        fit <- glmnet(x = jk_data, y = newOut, family = "binomial", alpha = Alpha, lambda = Lambda)
       }
     } 
     # 2. LOOCV
@@ -99,7 +95,7 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID, me
       eg_handle <- c(as.numeric(eg[i,1:2][1]),as.numeric(eg[i,1:2][2]))  #gets the indices that will be dropped
       loocv_data <- data[-eg_handle,]
       newOut <- outcome[-eg_handle]
-      fit <- glmnet(x = loocv_data, y = newOut, family = "binomial", alpha = Alpha)
+      fit <- glmnet(x = loocv_data, y = newOut, family = "binomial", alpha = Alpha, lambda = Lambda)
     }
     # 3. BOOTSTRAP (default)
     else{
@@ -113,7 +109,7 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID, me
         newData <- data[rownames(data) %in% names(newDataInd),] # subset the data
         newOut <- as.numeric(newDataInd)
         # Do glmnet - 'gaussian' family
-        fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha)
+        fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha, lambda = Lambda)
       } else {
         # sample from qualitative outcome
         newDataInd <- c(sample(grep(levels(outcome)[1], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[1], outcome))))), 
@@ -121,19 +117,19 @@ bootNet <- function(data, outcome, Alpha, iter, Lambda, sub_sample, sampleID, me
         newData <- data[newDataInd,]  # subset the data
         newOut <- outcome[newDataInd] # In the outcome variable get the same patients as were selected for this iteration
         # Do glmnet - 'binomial' family
-        fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha)
+        fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha, lambda = Lambda)
       }
     }
     # Get model coefficients
     Coefficients <- coef(fit, s = 0.001)  # if cv is performed this can be coef(fit, s = cv.fit$lambda.min)
     
     # Get CpG list for which coefficients are not 0
-    cpgs <- cpg.sites[Coefficients@i]
+    selected.sites <- featured.sites[Coefficients@i]
     name <- paste('run:', i, sep = '')
-    cpg_list[[name]] <- cpgs
+    site_list[[name]] <- selected.sites
   }
   
-  return(cpg_list)
+  return(site_list)
   cat('\n', ' ...Processing Done...')
 }
 
@@ -168,7 +164,7 @@ bootNet.parallel <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cor
   registerDoParallel(cores = cores)
   
   # create an object to extract sites from later
-  cpg.sites <- rownames(data)
+  feature.sites <- rownames(data)
   
   # transpose data for glmnet
   data <- t(data)
@@ -187,7 +183,7 @@ bootNet.parallel <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cor
       newData <- data[rownames(data) %in% names(newDataInd),] # subset the data
       newOut <- as.numeric(newDataInd)
       # Do glmnet - 'gaussian' family
-      fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha)
+      fit <- glmnet(x = newData, y = newOut, family = "gaussian", alpha = Alpha, lambda = Lambda)
     } else {
       # sample from qualitative outcome
       newDataInd <- c(sample(grep(levels(outcome)[1], outcome), ceiling(sub_sample*(length(grep(levels(outcome)[1], outcome))))), 
@@ -195,14 +191,14 @@ bootNet.parallel <- function(data, outcome, Alpha, iter, Lambda, sub_sample, cor
       newData <- data[newDataInd,]  # subset the data
       newOut <- outcome[newDataInd] # In the outcome variable get the same patients as were selected for this iteration
       # Do glmnet - 'gaussian' family
-      fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha)
+      fit <- glmnet(x = newData, y = newOut, family = "binomial", alpha = Alpha, lambda = Lambda)
     } 
     
     # Get model coefficients
     Coefficients <- coef(fit, s = 0.001)  # if cv is performed this can be coef(fit, s = cv.fit$lambda.min)
-    # Get CpG list for which coefficients are not 0
-    cpgs <- cpg.sites[Coefficients@i]
-    list(cpgs)
+    # Get site list for which coefficients are not 0
+    selected.sites <- feature.sites[Coefficients@i]
+    list(selected.sites)
   }
 }
 #################################
