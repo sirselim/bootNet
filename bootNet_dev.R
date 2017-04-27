@@ -1,9 +1,9 @@
 #!/usr/bin/Rscript
 #
 # Created: 2016/01/10
-# Last modified: 2016/10/20
+# Last modified: 2017/04/27
 # Author: Miles Benton
-# Version: 0.1.1.2
+# Version: 0.1.2.0
 # 
 # bootNet is a wrapper for the fantastic glmnet R package - it brings bootstrapping and parallel processing to the elastic-net framework.
 #
@@ -14,10 +14,6 @@
 # This update adds a parallel version of the bootNet function to utalise multiple cores if available
 # WARNING [here be dragons!]: be aware of the amount of available system RAM when using bootNet.parallel, if the data
 # set is large even running across 4-8 cores will quickly utalise many GB of RAM - you have been warned!
-#
-# This script is currently set up to analyse methylation data in the form of beta matrices.
-# The beta matrix must have CpG sites as rows and samples as columns for bootNet to work.
-# Hopefully future updates will allow analysis of various types of data.
 #
 # E.g. use:
 # bootNet.parallel(data = x, outcome = y, Alpha = 0.1, iter = 1000, sub_sample = 0.666, cores = 4, sampleID = sampleID)
