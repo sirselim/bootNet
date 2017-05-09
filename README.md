@@ -44,6 +44,7 @@ What do you need to provide the `bootNet` script?
 
 ## To do list
 
+  - add functionality to automatically 'tally' the results and rank them by number of iterations passed 
   - ~~merge development script back into the main code base~~
   - ~~add BOOTNET, JACKKNIFE and LOOCV methods to main script~~
   - add BOOTNET, JACKKNIFE and LOOCV methods to the parallel method
