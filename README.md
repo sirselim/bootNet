@@ -60,6 +60,7 @@ What do you need to provide the `bootNet` script?
   - look into AUC and ROC as another form of marker selection/validation
   - ~~add an argument to perform "leave one out" analysis (alternative to sub-sampling)~~
   - write up as manuscript
+  - add option for paired samplesin LOO-CV method
     + ***bootNet: identifying robust classifiers in methylation data***  
 
 ## Performance expectations
