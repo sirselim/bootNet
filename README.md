@@ -27,7 +27,7 @@ With a recent update `bootNet` is now data agnostic and has been tested with SNP
 
 What do you need to provide the `bootNet` script?
 
-  - *data* - methylation beta matrix (formated CpG sites as rows, samples as columns)
+  - *data* - data matrix (formated predictors as rows, samples as columns)
   - *outcome* - either as numeric (quantitative trait) or as factor (qualitative trait)
   - *Alpha* - sets the mixture between ridge-regression and lasso
   - *iter* - the number of iterations to bootstrap
