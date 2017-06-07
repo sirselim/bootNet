@@ -20,9 +20,15 @@ registerDoMC(cores=4)
 lambda.matrix <- NULL
 for (i in c(1:30)) {
   
-  cv.fit <- cv.glmnet(x, as.numeric(y), parallel = T)  # Perform cross validation on the fited model
+  # if y is quantitative use gaussian
+  # cv.fit <- cv.glmnet(x, as.numeric(y), parallel = T)  # Perform cross validation on the fited model
+  # if y is qualitative use binomial
+  cv.fit <- cv.glmnet(t(snp.matrix), y, family = 'binomial', parallel = T)  # Perform cross validation on the fited model
+  # create data.frame of lambda.min and lambda.1se
   lambda.matrix <- rbind(lambda.matrix, data.frame(lambda.min = cv.fit$lambda.min, lambda.1se = cv.fit$lambda.1se))
-  # cv.fit <- cv.glmnet(t(Train), design.mat, parallel = T)  # Perform cross validation on the fited model
+  
 }
+
+# take the mean lambdas
 colMeans(lambda.matrix)	# user can decide which 'mean' lambda to use moving into bootnet
 ##
