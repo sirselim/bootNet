@@ -2,7 +2,7 @@
 
 `bootNet` is a wrapper for the fantastic [glmnet](https://cran.r-project.org/web/packages/glmnet/index.html) `R` package - it brings bootstrapping and parallel processing to the elastic-net framework.
 
-This script was originally desinged to analyse methylation data in the form of beta matrices. The beta matrix must have CpG sites as rows and samples as columns for bootNet to work. 
+This script was originally designed to analyse methylation data in the form of beta matrices. The beta matrix must have CpG sites as rows and samples as columns for bootNet to work. 
 
 With a recent update `bootNet` is now data agnostic and has been tested with SNP and expression data (as well as methylation).
 
@@ -27,7 +27,7 @@ With a recent update `bootNet` is now data agnostic and has been tested with SNP
 
 What do you need to provide the `bootNet` script?
 
-  - *data* - data matrix (formated predictors as rows, samples as columns)
+  - *data* - data matrix (formatted predictors as rows, samples as columns)
   - *outcome* - either as numeric (quantitative trait) or as factor (qualitative trait)
   - *Alpha* - sets the mixture between ridge-regression and lasso
   - *iter* - the number of iterations to bootstrap
@@ -60,7 +60,7 @@ What do you need to provide the `bootNet` script?
   - look into AUC and ROC as another form of marker selection/validation
   - ~~add an argument to perform "leave one out" analysis (alternative to sub-sampling)~~
   - write up as manuscript
-  - add option for paired samplesin LOO-CV method
+  - add option for paired samples in LOO-CV method
     + ***bootNet: identifying robust classifiers in methylation data***  
 
 ## Performance expectations
