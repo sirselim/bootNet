@@ -9,7 +9,7 @@ With a recent update `bootNet` is now data agnostic and has been tested with SNP
 ## Updates
 
 ### 2020-07-30
-Added a directory including code contributed by Sean Burnard which is used in a recent manuscript. DOI and citation will be added shortly.
+Added a directory ([here](https://github.com/sirselim/bootNet/tree/master/SNPs_For_BootNet)) which includes code and documentation contributed by Sean Burnard which is used in a recent manuscript exploring genetic associations in multiple sclerosis. *DOI and citation will be added shortly.*
 
 ### Version: 0.1.2.0
 
