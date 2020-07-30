@@ -1,3 +1,5 @@
+![](https://zenodo.org/badge/DOI/10.5281/zenodo.3966550.svg)
+
 # SNPs_For_BootNet
 
 > SNPs_For_BootNet  is a function that seemlessly imports recoded plink SNP files (.raw format) and integrates two GLMNet wrappers developed by Miles Benton for penalised regression analysis by GLMNet. This extracts all SNP selected during the BootNet procedure (iterations of GLMNet) and converts them into percentages, recording both the output of results in a .csv file and the optional input values used (including lambda) in a .txt file.
