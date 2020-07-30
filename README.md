@@ -1,3 +1,5 @@
+https://zenodo.org/badge/DOI/10.5281/zenodo.3966550.svg
+
 # bootNet ('strapping the elastic-net)
 
 `bootNet` is a wrapper for the fantastic [glmnet](https://cran.r-project.org/web/packages/glmnet/index.html) `R` package - it brings bootstrapping and parallel processing to the elastic-net framework.
