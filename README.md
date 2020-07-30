@@ -8,6 +8,9 @@ With a recent update `bootNet` is now data agnostic and has been tested with SNP
 
 ## Updates
 
+### 2020-07-30
+Added a directory including code contributed by Sean Burnard which is used in a recent manuscript. DOI and citation will be added shortly.
+
 ### Version: 0.1.2.0
 
   - code base overhauled to be data agnostic (i.e. it can be used for methylation, SNP, expression data, but also any matrix of data if set up correctly in normal `glmnet` format)
