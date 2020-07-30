@@ -1,4 +1,4 @@
-https://zenodo.org/badge/DOI/10.5281/zenodo.3966550.svg
+![](https://zenodo.org/badge/DOI/10.5281/zenodo.3966550.svg)
 
 # bootNet ('strapping the elastic-net)
 
